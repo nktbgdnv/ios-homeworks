@@ -17,7 +17,7 @@ class PostViewController: UIViewController {
     }
     
     private func setupView(){
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         self.navigationItem.title = titlePost
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage (systemName: "info.circle"), style: .plain, target: self, action: #selector(infoAction))
     }
