@@ -7,18 +7,18 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {
-
-    var profileView: ProfileHeaderView { return self.view as! ProfileHeaderView }
-    
+class ProfileViewController: UIViewController {    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
     }
     
     override func loadView() {
+        // from previous task
         self.view = ProfileHeaderView(frame: UIScreen.main.bounds)
 
     }
+
     
 }
