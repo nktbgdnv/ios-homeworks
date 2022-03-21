@@ -8,7 +8,8 @@
 import UIKit
 
 class ProfileHeaderView: UIView {
-
+    var constraintFlag = false
+    let initialStatus = "Waiting for something..."
     let status = "I am drinking tea!"
     
     private var avatarImage = UIImage(named: "tom.jpeg")
@@ -18,6 +19,7 @@ class ProfileHeaderView: UIView {
     private var setStatusButton = UIButton(frame: .zero)
     
     private var initialStatusButtonConstraints = [NSLayoutConstraint]()
+    private var newStatusButtonConstraints = [NSLayoutConstraint]()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,12 +61,11 @@ class ProfileHeaderView: UIView {
         /// creating label with status
         statusLabel = UILabel(frame: .zero)
         statusLabel.numberOfLines = 0
-        statusLabel.text = "Waiting for something..."
+        statusLabel.text = initialStatus
         statusLabel.textColor = .gray
         statusLabel.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         statusLabel.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(statusLabel)
-
         
         /// create text field
         statusTextField.textColor = .black
@@ -74,7 +75,8 @@ class ProfileHeaderView: UIView {
         statusTextField.layer.borderWidth = 1
         statusTextField.layer.borderColor = UIColor.black.cgColor
         statusTextField.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(statusTextField)
+
+        // self.addSubview(statusTextField)
 
         
         /// set settings for statusButton
@@ -90,10 +92,10 @@ class ProfileHeaderView: UIView {
         setStatusButton.layer.masksToBounds = false
         setStatusButton.layer.cornerRadius = 4.0
         
+        
         setStatusButton.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(setStatusButton)
-        
-        
+    
         
         /// CONSTRAINTS
         // constraints for avatarView
@@ -114,17 +116,10 @@ class ProfileHeaderView: UIView {
             statusLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 90),
             statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor)
         ])
-        
-        // set constraints for text field
-        NSLayoutConstraint.activate([
-            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 15),
-            statusTextField.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor),
-            statusTextField.trailingAnchor.constraint(equalTo: setStatusButton.trailingAnchor),
-            NSLayoutConstraint(item: statusTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
-        ])
+
         
         // Constraints for status button
-        let topConstraintForButton = setStatusButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 200)
+        let topConstraintForButton = setStatusButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 150)
         let leadingConstraintForButton = setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         let trailingConstraintForButton = setStatusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
         let heightConstraintForButton = NSLayoutConstraint(item: setStatusButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
@@ -136,23 +131,59 @@ class ProfileHeaderView: UIView {
 
     }
     
+//    @objc func statusTextFieldValueChanged() {
+//        print("text was changed")
+//    }
+    
     // function changing status
     @objc func buttonStatusAction() {
         // changing text status
 //        statusLabel.text = status
 //        print("Current status: \(statusLabel.text!)")
-    
-        NSLayoutConstraint.deactivate(initialStatusButtonConstraints)
+        
+        constraintFlag = !constraintFlag
+        
         // New constraints for status button
-        let newTopConstraintForButton = setStatusButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 400)
+        let newTopConstraintForButton = setStatusButton.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 180)
         let newLeadingConstraintForButton = setStatusButton.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         let newTrailingConstraintForButton = setStatusButton.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -16)
-        let newHeightConstraintForButton = NSLayoutConstraint(item: setStatusButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+        let newHeightConstraintForButton = NSLayoutConstraint(item: setStatusButton, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
+        newStatusButtonConstraints.append(contentsOf: [newTopConstraintForButton,
+                             newLeadingConstraintForButton,
+                             newTrailingConstraintForButton,
+                             newHeightConstraintForButton])
+        
+        self.addSubview(statusTextField)
+        
+        switch constraintFlag {
+        case true:
+            do {
+                NSLayoutConstraint.deactivate(self.initialStatusButtonConstraints)
+                NSLayoutConstraint.activate(self.newStatusButtonConstraints)
 
-        NSLayoutConstraint.activate([newTopConstraintForButton,
-                                     newLeadingConstraintForButton,
-                                     newTrailingConstraintForButton,
-                                     newHeightConstraintForButton])
+                // set constraints for text field
+                NSLayoutConstraint.activate([
+                    statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 15),
+                    statusTextField.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor),
+                    statusTextField.trailingAnchor.constraint(equalTo: setStatusButton.trailingAnchor),
+                    NSLayoutConstraint(item: statusTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 50)
+                ])
+            }
+        case false:
+            do {
+                NSLayoutConstraint.deactivate(self.newStatusButtonConstraints)
+                NSLayoutConstraint.activate(self.initialStatusButtonConstraints)
+                
+                self.statusTextField.removeFromSuperview()
+            }
+        }
+
+        if statusTextField.text != "" {
+            statusLabel.text = statusTextField.text!
+        } else if statusLabel.text != initialStatus {
+            statusLabel.text = "Text field is empty"
+        }
+
     }
     
 }

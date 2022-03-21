@@ -19,6 +19,6 @@ class ProfileViewController: UIViewController {
         self.view = ProfileHeaderView(frame: UIScreen.main.bounds)
 
     }
-
     
 }
+
