@@ -10,39 +10,79 @@ import UIKit
 class FeedViewController: UIViewController {
     
     var firstPost = Post(title: "Первый пост")
+    var secondPost = Post(title: "Второй пост")
 
-    @objc private func buttonAction() {
+    @objc private func firstPostbuttonAction() {
         let postViewController = PostViewController()
         postViewController.titlePost = firstPost.title
         self.navigationController?.pushViewController(postViewController, animated: true)
        }
     
+    @objc private func secondPostbuttonAction() {
+        let postViewController = PostViewController()
+        postViewController.titlePost = secondPost.title
+        self.navigationController?.pushViewController(postViewController, animated: true)
+       }
+    
     // create button to go to the first post
-    private lazy var button: UIButton = {
+    private lazy var firstPostButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .blue
         button.layer.cornerRadius = 12
         button.setTitle(firstPost.title, for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(firstPostbuttonAction), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 300).isActive = true
         return button
     }()
     
-    // create visual content for button
-    private func setupButton() {
-            self.view.addSubview(self.button)
-            self.button.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -100).isActive = true
-            self.button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true
-            self.button.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true
-            self.button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        }
+    // create button to go to the first post
+    private lazy var secondPostButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .blue
+        button.layer.cornerRadius = 12
+        button.setTitle(secondPost.title, for: .normal)
+        button.setTitleColor(.lightGray, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
+        button.addTarget(self, action: #selector(secondPostbuttonAction), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        button.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        return button
+    }()
+    
+    // create constraints for first button
+    private func drawSelf() {
+        
+        
+        /// create stackView
+        let postsStackView: UIStackView = {
+            let stackView = UIStackView()
+            stackView.axis  = NSLayoutConstraint.Axis.vertical
+            stackView.distribution  = UIStackView.Distribution.equalSpacing
+            stackView.alignment = UIStackView.Alignment.center
+            stackView.spacing = 10
+            stackView.addArrangedSubview(firstPostButton)
+            stackView.addArrangedSubview(secondPostButton)
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            return stackView
+        }()
+        
+        self.view.addSubview(postsStackView)
+        
+        //Constraints for postsStackView
+            postsStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+            postsStackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupButton()
+        drawSelf()
     }
 
 
 }
+
