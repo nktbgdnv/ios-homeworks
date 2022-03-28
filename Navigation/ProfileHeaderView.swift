@@ -155,8 +155,12 @@ class ProfileHeaderView: UIView {
         statusTextFieldValueChanged()
         statusLabel.text = statusText
         statusTextField.text = nil
-        
-
+        addTapGestureToHideKeyboard()
     }
     
+    // !!! method to hide the keyboard, when you click the on the screen
+    func addTapGestureToHideKeyboard() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
+        self.addGestureRecognizer(tapGesture)
+    }
 }

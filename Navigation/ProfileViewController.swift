@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController {    
+class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +19,7 @@ class ProfileViewController: UIViewController {
         self.view = ProfileHeaderView(frame: UIScreen.main.bounds)
 
     }
+
     
 }
 

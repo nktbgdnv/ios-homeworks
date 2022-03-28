@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBar: UITabBarController {
+class TabBar: UITabBarController, UITabBarControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,17 +15,18 @@ class TabBar: UITabBarController {
         UITabBar.appearance().barTintColor = .systemBackground
         tabBar.tintColor = .label
         createArrayOfViewControllers()
+        
+        self.delegate = self
     }
     
-    fileprivate func createArrayOfViewControllers() {
+    private func createArrayOfViewControllers() {
         viewControllers = [
             createNavigationController(for: FeedViewController(), title: NSLocalizedString("Лента", comment: ""), image: UIImage(systemName: "house")!),
-            createNavigationController(for: ProfileViewController(), title: NSLocalizedString("Профиль", comment: ""), image: UIImage(systemName: "person")!)
+            createNavigationController(for: LogInViewController(), title: NSLocalizedString("Профиль", comment: ""), image: UIImage(systemName: "person")!)
                 ]
         }
-    }
     
-    fileprivate func createNavigationController(for rootViewController: UIViewController,
+    private func createNavigationController(for rootViewController: UIViewController,
                                                     title: String,
                                                     image: UIImage) -> UIViewController {
           let navController = UINavigationController(rootViewController: rootViewController)
@@ -35,5 +36,20 @@ class TabBar: UITabBarController {
           rootViewController.navigationItem.title = title
           return navController
       }
-
+    
+    /*
+    // РАБОТАЕТ!
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        switch item.title! {
+        case "Лента":
+            print("Это лента")
+        case "Профиль":
+            print("Это профиль")
+        default:
+        print("")
+        }
+    }
+    */
+     
+}
 

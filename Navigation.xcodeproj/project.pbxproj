@@ -17,6 +17,7 @@
 		117526C727CD51BF00ED1749 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117526C627CD51BF00ED1749 /* SceneDelegate.swift */; };
 		117526CE27CD51C400ED1749 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117526CD27CD51C400ED1749 /* Assets.xcassets */; };
 		117526D127CD51C400ED1749 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 117526CF27CD51C400ED1749 /* LaunchScreen.storyboard */; };
+		1177070027F0F69400659775 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117706FF27F0F69300659775 /* LogInViewController.swift */; };
 		11D19B2727CEB1DC00F910C3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D19B2327CEB1DC00F910C3 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		117526CD27CD51C400ED1749 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		117526D027CD51C400ED1749 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		117526D227CD51C400ED1749 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		117706FF27F0F69300659775 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		11D19B2327CEB1DC00F910C3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -52,6 +54,7 @@
 			children = (
 				11D19B2327CEB1DC00F910C3 /* ProfileViewController.swift */,
 				114EBBA827E28B66003A76DA /* ProfileHeaderView.swift */,
+				117706FF27F0F69300659775 /* LogInViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				117526C727CD51BF00ED1749 /* SceneDelegate.swift in Sources */,
 				115AFDDF27DCD6A7003E8F0B /* Post.swift in Sources */,
 				115AFDE127DCE08D003E8F0B /* InfoViewController.swift in Sources */,
+				1177070027F0F69400659775 /* LogInViewController.swift in Sources */,
 				1157DE0227DCA5E900535E81 /* FeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
