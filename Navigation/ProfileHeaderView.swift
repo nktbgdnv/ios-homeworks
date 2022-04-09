@@ -16,7 +16,6 @@ class ProfileHeaderView: UIView {
     // private var fullNameLabel = UILabel(frame: .zero)
     private var statusLabel = UILabel()
     private lazy var statusTextField = UITextField(frame: .zero)
-    // private var setStatusButton = UIButton(frame: .zero)
     
     private var initialStatusButtonConstraints = [NSLayoutConstraint]()
     private var newStatusButtonConstraints = [NSLayoutConstraint]()
@@ -33,7 +32,7 @@ class ProfileHeaderView: UIView {
     
     // creating subviews
     func createSubViews() {
-        backgroundColor = .lightGray
+        backgroundColor = .white
         
         /// creating UIImageView with avatar
         let avatarImageView: UIImageView = {
@@ -45,7 +44,7 @@ class ProfileHeaderView: UIView {
             imageView.clipsToBounds = true
             imageView.layer.borderWidth = 3
             imageView.layer.borderColor = UIColor.white.cgColor
-            imageView.translatesAutoresizingMaskIntoConstraints = false
+            imageView.toAutoLayout()
             return imageView
         }()
         self.addSubview(avatarImageView)
@@ -57,7 +56,7 @@ class ProfileHeaderView: UIView {
             label.text = "Tom Cruise"
             label.textColor = .black
             label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-            label.translatesAutoresizingMaskIntoConstraints = false
+            label.toAutoLayout()
             return label
         }()
         self.addSubview(fullNameLabel)
@@ -69,7 +68,7 @@ class ProfileHeaderView: UIView {
             label.text = statusText
             label.textColor = .gray
             label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-            label.translatesAutoresizingMaskIntoConstraints = false
+            label.toAutoLayout()
             return label
         }()
         self.addSubview(statusLabel)
@@ -83,7 +82,7 @@ class ProfileHeaderView: UIView {
             textField.layer.cornerRadius = 12
             textField.layer.borderWidth = 1
             textField.layer.borderColor = UIColor.black.cgColor
-            textField.translatesAutoresizingMaskIntoConstraints = false
+            textField.toAutoLayout()
             textField.addTarget(self, action: #selector(statusTextFieldValueChanged), for: .editingChanged)
             return textField
         }()
@@ -102,35 +101,27 @@ class ProfileHeaderView: UIView {
             button.layer.shadowRadius = 4.0
             button.layer.masksToBounds = false
             button.layer.cornerRadius = 4.0
-            button.translatesAutoresizingMaskIntoConstraints = false
+            button.toAutoLayout()
         return button
         }()
         self.addSubview(setStatusButton)
     
         /// CONSTRAINTS
-        // constraints for avatarView
         NSLayoutConstraint.activate([
+            // constraints for avatarView
             avatarImageView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 16),
-            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16)
-        ])
-        
-        // constraints for label with fullname
-        NSLayoutConstraint.activate([
+            avatarImageView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            // constraints for label with fullname
             fullNameLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 27),
-            fullNameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 150)
-        ])
-        
-        // constraints for label with status
-        NSLayoutConstraint.activate([
+            fullNameLabel.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 150),
+            // constraints for label with status
             statusLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 90),
-            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor)
-        ])
-
-        // set constraints for text field
-        NSLayoutConstraint.activate([statusTextField.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 115),
-                                     statusTextField.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor),
-                                     statusTextField.trailingAnchor.constraint(equalTo: setStatusButton.trailingAnchor),
-                                     NSLayoutConstraint(item: statusTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
+            statusLabel.leadingAnchor.constraint(equalTo: fullNameLabel.leadingAnchor),
+            // set constraints for text field
+            statusTextField.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 115),
+            statusTextField.leadingAnchor.constraint(equalTo: statusLabel.leadingAnchor),
+            statusTextField.trailingAnchor.constraint(equalTo: setStatusButton.trailingAnchor),
+            NSLayoutConstraint(item: statusTextField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
         ])
         
         // Constraints for status button

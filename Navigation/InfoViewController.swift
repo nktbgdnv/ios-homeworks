@@ -32,7 +32,7 @@ class InfoViewController: UIViewController, UIAlertViewDelegate {
         button.setTitleColor(.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.addTarget(self, action: #selector(alertButtonAction), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         return button
     }()
     

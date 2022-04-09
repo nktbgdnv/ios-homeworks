@@ -28,12 +28,12 @@ class FeedViewController: UIViewController {
     private lazy var firstPostButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .blue
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 14
         button.setTitle(firstPost.title, for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.addTarget(self, action: #selector(firstPostbuttonAction), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.widthAnchor.constraint(equalToConstant: 300).isActive = true
         return button
@@ -43,12 +43,12 @@ class FeedViewController: UIViewController {
     private lazy var secondPostButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .blue
-        button.layer.cornerRadius = 12
+        button.layer.cornerRadius = 14
         button.setTitle(secondPost.title, for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.addTarget(self, action: #selector(secondPostbuttonAction), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         button.widthAnchor.constraint(equalToConstant: 300).isActive = true
         return button
@@ -67,7 +67,7 @@ class FeedViewController: UIViewController {
             stackView.spacing = 10
             stackView.addArrangedSubview(firstPostButton)
             stackView.addArrangedSubview(secondPostButton)
-            stackView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.toAutoLayout()
             return stackView
         }()
         
