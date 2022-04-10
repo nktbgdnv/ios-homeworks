@@ -12,8 +12,7 @@ class ProfileHeaderView: UIView {
     let initialStatus = "Waiting for something..."
     var statusText = "At home"
     
-    private lazy var avatarImage = UIImage(named: "tom.jpeg")
-    // private var fullNameLabel = UILabel(frame: .zero)
+    private lazy var avatarImage = UIImage(named: "nik.jpeg")
     private var statusLabel = UILabel()
     private lazy var statusTextField = UITextField(frame: .zero)
     
@@ -29,7 +28,6 @@ class ProfileHeaderView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     // creating subviews
     func createSubViews() {
         backgroundColor = .white
@@ -39,6 +37,8 @@ class ProfileHeaderView: UIView {
             let imageView = UIImageView(image: avatarImage!)
             imageView.contentMode = UIView.ContentMode.scaleAspectFill
             imageView.image = avatarImage
+            imageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+            imageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
             // Make image corners Rounded
             imageView.layer.cornerRadius = 60
             imageView.clipsToBounds = true
@@ -53,7 +53,7 @@ class ProfileHeaderView: UIView {
         let fullNameLabel: UILabel = {
             let label = UILabel()
             label.numberOfLines = 0
-            label.text = "Tom Cruise"
+            label.text = "Nikita Bogdanov"
             label.textColor = .black
             label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
             label.toAutoLayout()
