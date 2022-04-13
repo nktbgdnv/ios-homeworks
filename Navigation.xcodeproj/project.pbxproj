@@ -18,6 +18,8 @@
 		117526CE27CD51C400ED1749 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117526CD27CD51C400ED1749 /* Assets.xcassets */; };
 		117526D127CD51C400ED1749 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 117526CF27CD51C400ED1749 /* LaunchScreen.storyboard */; };
 		1177070027F0F69400659775 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117706FF27F0F69300659775 /* LogInViewController.swift */; };
+		11B323482806206B0054C051 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B323472806206B0054C051 /* PostTableViewCell.swift */; };
+		11B3234B280630E30054C051 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3234A280630E30054C051 /* Protocols.swift */; };
 		11D19B2727CEB1DC00F910C3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D19B2327CEB1DC00F910C3 /* ProfileViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +37,8 @@
 		117526D027CD51C400ED1749 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		117526D227CD51C400ED1749 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		117706FF27F0F69300659775 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		11B323472806206B0054C051 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		11B3234A280630E30054C051 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		11D19B2327CEB1DC00F910C3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,17 +100,43 @@
 		117526C327CD51BF00ED1749 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				11B32349280630AF0054C051 /* Protocol */,
+				11B32346280620020054C051 /* Cells */,
 				114EBBA727E287AD003A76DA /* Profile */,
 				115AFDDD27DCD681003E8F0B /* Data */,
 				1157DE0327DCC0B600535E81 /* Controllers */,
 				117526C427CD51BF00ED1749 /* AppDelegate.swift */,
 				117526C627CD51BF00ED1749 /* SceneDelegate.swift */,
-				117526CD27CD51C400ED1749 /* Assets.xcassets */,
+				11A4E9A12804B94C00ABC590 /* Resources */,
 				117526CF27CD51C400ED1749 /* LaunchScreen.storyboard */,
-				117526D227CD51C400ED1749 /* Info.plist */,
 				110CFE6427DC7D0B00EF714B /* TabBar.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		11A4E9A12804B94C00ABC590 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				117526CD27CD51C400ED1749 /* Assets.xcassets */,
+				117526D227CD51C400ED1749 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		11B32346280620020054C051 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				11B323472806206B0054C051 /* PostTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		11B32349280630AF0054C051 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				11B3234A280630E30054C051 /* Protocols.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,8 +209,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11B323482806206B0054C051 /* PostTableViewCell.swift in Sources */,
 				1157DE0527DCC59300535E81 /* PostViewController.swift in Sources */,
 				117526C527CD51BF00ED1749 /* AppDelegate.swift in Sources */,
+				11B3234B280630E30054C051 /* Protocols.swift in Sources */,
 				110CFE6527DC7D0B00EF714B /* TabBar.swift in Sources */,
 				11D19B2727CEB1DC00F910C3 /* ProfileViewController.swift in Sources */,
 				114EBBA927E28B66003A76DA /* ProfileHeaderView.swift in Sources */,

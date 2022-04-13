@@ -7,6 +7,8 @@
 
 import Foundation
 
-struct Post {
-    var title: String
+struct Posts {
+    var author, description, image : String
+    var likes, views: Int
 }
+

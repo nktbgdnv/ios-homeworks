@@ -9,18 +9,18 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var firstPost = Post(title: "Первый пост")
-    var secondPost = Post(title: "Второй пост")
+    var firstPost = Posts(author: "", description: "Первый пост", image: "", likes: 0, views: 0)
+    var secondPost = Posts(author: "", description: "Второй пост", image: "", likes: 0, views: 0)
 
     @objc private func firstPostbuttonAction() {
         let postViewController = PostViewController()
-        postViewController.titlePost = firstPost.title
+        postViewController.titlePost = firstPost.description
         self.navigationController?.pushViewController(postViewController, animated: true)
        }
     
     @objc private func secondPostbuttonAction() {
         let postViewController = PostViewController()
-        postViewController.titlePost = secondPost.title
+        postViewController.titlePost = secondPost.description
         self.navigationController?.pushViewController(postViewController, animated: true)
        }
     
@@ -29,7 +29,7 @@ class FeedViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .blue
         button.layer.cornerRadius = 14
-        button.setTitle(firstPost.title, for: .normal)
+        button.setTitle(firstPost.description, for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.addTarget(self, action: #selector(firstPostbuttonAction), for: .touchUpInside)
@@ -44,7 +44,7 @@ class FeedViewController: UIViewController {
         let button = UIButton()
         button.backgroundColor = .blue
         button.layer.cornerRadius = 14
-        button.setTitle(secondPost.title, for: .normal)
+        button.setTitle(secondPost.description, for: .normal)
         button.setTitleColor(.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 24)
         button.addTarget(self, action: #selector(secondPostbuttonAction), for: .touchUpInside)

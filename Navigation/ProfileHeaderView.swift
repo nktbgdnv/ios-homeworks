@@ -149,7 +149,7 @@ class ProfileHeaderView: UIView {
         addTapGestureToHideKeyboard()
     }
     
-    // !!! method to hide the keyboard, when you click the on the screen
+    // method to hide the keyboard, when you click the on the screen
     func addTapGestureToHideKeyboard() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.endEditing))
         self.addGestureRecognizer(tapGesture)
