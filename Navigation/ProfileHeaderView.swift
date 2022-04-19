@@ -7,9 +7,8 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
-    var constraintFlag = false
-    let initialStatus = "Waiting for something..."
+class ProfileHeaderView: UITableViewHeaderFooterView {
+    
     var statusText = "At home"
     
     private lazy var avatarImage = UIImage(named: "nik.jpeg")
@@ -19,14 +18,18 @@ class ProfileHeaderView: UIView {
     private var initialStatusButtonConstraints = [NSLayoutConstraint]()
     private var newStatusButtonConstraints = [NSLayoutConstraint]()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    static let reuseIdentifier: String = String(describing: self)
+    
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
         createSubViews()
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        createSubViews()
     }
+    
     
     // creating subviews
     func createSubViews() {

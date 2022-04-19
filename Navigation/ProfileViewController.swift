@@ -32,6 +32,7 @@ final class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileHeaderView.self))
         self.setupNavigationBar()
         self.setupView()
         self.addDataSource()
@@ -83,13 +84,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerView = UIView()
-        if section == 0 {
-            headerView = ProfileHeaderView()
+    func tableView(_ tableView: UITableView,
+                       viewForHeaderInSection section: Int) -> UIView? {
+        return tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileHeaderView.self))
         }
-        return headerView
-    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return  250

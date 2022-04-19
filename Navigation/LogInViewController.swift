@@ -101,14 +101,46 @@ class LogInViewController: UIViewController {
         self.view.addGestureRecognizer(tapGesture)
     }
 
+    // adding observers when view will appears
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // adding observers when view did disappears
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        let nc = NotificationCenter.default
+        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    // method to raise the bottom of the ScrollView when the keyboard is extended
+    @objc private func keyboardShow(notification: NSNotification) {
+        guard let keyboardFrameValue = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue) else { return }
+        let keyboardFrame = self.view.convert(keyboardFrameValue.cgRectValue, from: nil)
+        if UIDevice.current.orientation.isLandscape {
+            scrollView.contentInset.bottom = keyboardFrame.size.height + 60
+            scrollView.scrollIndicatorInsets = scrollView.contentInset
+        } else {
+            scrollView.contentInset.bottom = keyboardFrame.size.height + 60
+            scrollView.scrollIndicatorInsets = scrollView.contentInset
+            }
+        }
+    
+    @objc private func keyboardHide(notification: NSNotification) {
+        scrollView.contentInset = .zero
+        scrollView.scrollIndicatorInsets = scrollView.contentInset
+    }
+    
     @objc private func tap(gesture: UITapGestureRecognizer) {
             self.loginTextField.resignFirstResponder()
             self.passwordTextField.resignFirstResponder()
         }
     
     @objc private func loginButtonClick() {
-        // to do: implement validation of entered data
-        
         // passing to ProfileViewController instance
         let profileViewController = ProfileViewController()
         self.navigationController?.pushViewController(profileViewController, animated: true)
@@ -128,33 +160,31 @@ class LogInViewController: UIViewController {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             // constraints for scrollView
-            self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            self.scrollView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
-            self.scrollView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
-            self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            self.scrollView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.scrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.scrollView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            self.scrollView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             // constraints for contentView
             self.contentView.topAnchor.constraint(equalTo: self.scrollView.topAnchor),
-            self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
             self.contentView.leadingAnchor.constraint(equalTo: self.scrollView.leadingAnchor),
             self.contentView.trailingAnchor.constraint(equalTo: self.scrollView.trailingAnchor),
-            self.contentView.centerXAnchor.constraint(equalTo: self.scrollView.centerXAnchor),
-            self.contentView.centerYAnchor.constraint(equalTo: self.scrollView.centerYAnchor),
             self.contentView.widthAnchor.constraint(equalTo: self.scrollView.widthAnchor),
+            self.contentView.bottomAnchor.constraint(equalTo: self.scrollView.bottomAnchor),
             // constraints for logo_picture
             self.logoImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 120),
-            self.logoImageView.bottomAnchor.constraint(equalTo: self.loginStackView.topAnchor, constant: -120),
             self.logoImageView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor),
-            self.logoImageView.widthAnchor.constraint(equalToConstant: 100),
             self.logoImageView.heightAnchor.constraint(equalToConstant: 100),
+            self.logoImageView.heightAnchor.constraint(equalTo: self.logoImageView.widthAnchor, multiplier: 1.0),
             // constraints for login stackView
             self.loginStackView.topAnchor.constraint(equalTo: self.logoImageView.bottomAnchor, constant: 120),
             self.loginStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
             self.loginStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
             self.loginStackView.heightAnchor.constraint(equalToConstant: 100),
             // constraints for loginButton
-            self.loginButton.topAnchor.constraint(equalTo: self.loginStackView.bottomAnchor, constant: 16),
-            self.loginButton.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            self.loginButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -16),
+            self.loginButton.topAnchor.constraint(equalTo: self.loginStackView.bottomAnchor, constant: 30),
+            self.loginButton.leadingAnchor.constraint(equalTo: self.loginStackView.leadingAnchor),
+            self.loginButton.trailingAnchor.constraint(equalTo: self.loginStackView.trailingAnchor),
+            self.loginButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
             self.loginButton.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
