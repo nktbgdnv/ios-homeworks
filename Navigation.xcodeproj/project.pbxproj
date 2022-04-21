@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		110CFE6527DC7D0B00EF714B /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110CFE6427DC7D0B00EF714B /* TabBar.swift */; };
+		11442D5828116E7C00E9113D /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11442D5728116E7C00E9113D /* PhotosViewController.swift */; };
+		11442D5A28116F8E00E9113D /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11442D5928116F8D00E9113D /* PhotosCollectionViewCell.swift */; };
 		114EBBA927E28B66003A76DA /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114EBBA827E28B66003A76DA /* ProfileHeaderView.swift */; };
 		1157DE0227DCA5E900535E81 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157DE0127DCA5E900535E81 /* FeedViewController.swift */; };
 		1157DE0527DCC59300535E81 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157DE0427DCC59300535E81 /* PostViewController.swift */; };
@@ -18,6 +20,7 @@
 		117526CE27CD51C400ED1749 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 117526CD27CD51C400ED1749 /* Assets.xcassets */; };
 		117526D127CD51C400ED1749 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 117526CF27CD51C400ED1749 /* LaunchScreen.storyboard */; };
 		1177070027F0F69400659775 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117706FF27F0F69300659775 /* LogInViewController.swift */; };
+		1195781328109CB200BF5174 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1195781228109CB100BF5174 /* PhotosTableViewCell.swift */; };
 		11B323482806206B0054C051 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B323472806206B0054C051 /* PostTableViewCell.swift */; };
 		11B3234B280630E30054C051 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11B3234A280630E30054C051 /* Protocols.swift */; };
 		11D19B2727CEB1DC00F910C3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11D19B2327CEB1DC00F910C3 /* ProfileViewController.swift */; };
@@ -25,6 +28,8 @@
 
 /* Begin PBXFileReference section */
 		110CFE6427DC7D0B00EF714B /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		11442D5728116E7C00E9113D /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
+		11442D5928116F8D00E9113D /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		114EBBA827E28B66003A76DA /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		1157DE0127DCA5E900535E81 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		1157DE0427DCC59300535E81 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +42,7 @@
 		117526D027CD51C400ED1749 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		117526D227CD51C400ED1749 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		117706FF27F0F69300659775 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		1195781228109CB100BF5174 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		11B323472806206B0054C051 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		11B3234A280630E30054C051 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		11D19B2327CEB1DC00F910C3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +75,7 @@
 				1157DE0127DCA5E900535E81 /* FeedViewController.swift */,
 				1157DE0427DCC59300535E81 /* PostViewController.swift */,
 				115AFDE027DCE08D003E8F0B /* InfoViewController.swift */,
+				11442D5728116E7C00E9113D /* PhotosViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -127,6 +134,8 @@
 			isa = PBXGroup;
 			children = (
 				11B323472806206B0054C051 /* PostTableViewCell.swift */,
+				1195781228109CB100BF5174 /* PhotosTableViewCell.swift */,
+				11442D5928116F8D00E9113D /* PhotosCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -218,7 +227,10 @@
 				114EBBA927E28B66003A76DA /* ProfileHeaderView.swift in Sources */,
 				117526C727CD51BF00ED1749 /* SceneDelegate.swift in Sources */,
 				115AFDDF27DCD6A7003E8F0B /* Post.swift in Sources */,
+				1195781328109CB200BF5174 /* PhotosTableViewCell.swift in Sources */,
 				115AFDE127DCE08D003E8F0B /* InfoViewController.swift in Sources */,
+				11442D5A28116F8E00E9113D /* PhotosCollectionViewCell.swift in Sources */,
+				11442D5828116E7C00E9113D /* PhotosViewController.swift in Sources */,
 				1177070027F0F69400659775 /* LogInViewController.swift in Sources */,
 				1157DE0227DCA5E900535E81 /* FeedViewController.swift in Sources */,
 			);
