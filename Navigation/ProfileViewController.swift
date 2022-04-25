@@ -87,7 +87,7 @@ final class ProfileViewController: UIViewController {
     
     private func setupGesture() {
         tapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_ :)))
-        profileHeaderView.addGestureRecognizer(tapGestureRecognizer)
+        profileHeaderView.avatarImageView.addGestureRecognizer(tapGestureRecognizer)
     }
         
     @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
