@@ -36,20 +36,5 @@ class TabBar: UITabBarController, UITabBarControllerDelegate {
           rootViewController.navigationItem.title = title
           return navController
       }
-    
-    /*
-    // РАБОТАЕТ!
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        switch item.title! {
-        case "Лента":
-            print("Это лента")
-        case "Профиль":
-            print("Это профиль")
-        default:
-        print("")
-        }
-    }
-    */
-     
 }
 

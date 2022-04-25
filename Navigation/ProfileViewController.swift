@@ -9,6 +9,13 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
+    private let profileHeaderView = ProfileHeaderView()
+    private let detailedAvatarView: DetailedAvatarView = {
+        let avatarView = DetailedAvatarView()
+        avatarView.toAutoLayout()
+        return avatarView
+    }()
+    
     // create a tableView
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -32,26 +39,41 @@ final class ProfileViewController: UIViewController {
     // an array of type Posts
     private var dataSource: [Posts] = []
     
+    private let tapGestureRecognizer = UITapGestureRecognizer()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupNavigationBar()
         self.setupView()
         self.addDataSource()
+        self.setupGesture()
     }
     
     private func setupNavigationBar() {
         self.navigationController?.navigationBar.prefersLargeTitles = false
+        navigationItem.backButtonTitle = "Назад"
         self.navigationItem.title = "Профиль"
     }
     
     private func setupView() {
         view.backgroundColor = .white
         view.addSubview(self.tableView)
+        view.addSubview(detailedAvatarView)
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            detailedAvatarView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            detailedAvatarView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            detailedAvatarView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            detailedAvatarView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            detailedAvatarView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
@@ -61,6 +83,18 @@ final class ProfileViewController: UIViewController {
         self.dataSource.append(.init(author: "Павел Нитки", description: "Добряк Тсонга уходит из тенниса\nЖо-Вильфред Тсонга начал профессиональную карьеру в 2004 году и за это время сумел:\n\u{25E6} выиграть 18 титулов (включая два «Мастерса») – это седьмой результат среди действующих теннисистов\n\u{25E6} сыграть в финале Australian Open, полуфинале «Ролан Гаррос» и «Уимблдона» и четвертьфинале US Open\nпобывать пятой ракеткой мира\n\u{25E6} заработать 22 миллиона долларов призовыми – это 18-й результат в истории\n", image: "tsonga", likes: 32, views: 56))
         self.dataSource.append(.init(author: "Александр Дорский", description: "Кажется, Агаларова уже не догнать – он лучший бомбардир РПЛ!\nТакого взлета результативности у нас не было и с гонкой бомбардиров в РПЛ все ясно. \nВ воскресенье Гамид Агаларов забил 16-й гол в сезоне (с пенальти в ворота «Сочи») и оторвался от Артема Дзюбы и Федора Смолова на шесть мячей.\nПреимущество в пять сохранилось над Дмитрием Полозом – нападающий «Ростова» тоже забил в прошедшем туре.", image: "agalarov", likes: 32, views: 65))
         self.dataSource.append(.init(author: "Никита Петухов", description: "Овечкин забил 775-ю шайбу в НХЛ! И повторил рекорд Буре по голам в пустые ворота.\nЗа 2 секунды до конца матча с «Бостоном» Александр Овечкин забил в пустые ворота. Вдвоем с Кузнецовым они вышли на одного защитника и с паса партнера Ови бросил вообще без помех.\nЭто 775-я шайба Александра – он остается третьим в списке лучших снайперов всех времен, до Горди Хоу – 26 голов.", image: "ovi", likes: 22, views: 65))
+    }
+    
+    private func setupGesture() {
+        tapGestureRecognizer.addTarget(self, action: #selector(handleTapGesture(_ :)))
+        profileHeaderView.addGestureRecognizer(tapGestureRecognizer)
+    }
+        
+    @objc func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer){
+        guard self.tapGestureRecognizer === gestureRecognizer else { return }
+        UIView.animate(withDuration: 0.5) {
+            self.detailedAvatarView.alpha = 1
+        }
     }
 }
 
@@ -90,10 +124,17 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             }
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return profileHeaderView
+    }
+    
+    /*
     func tableView(_ tableView: UITableView,
                        viewForHeaderInSection section: Int) -> UIView? {
         return tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileHeaderView.self))
         }
+    
+     */
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return  250
@@ -105,5 +146,3 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             } else { return }
         }
 }
-
-

@@ -9,12 +9,77 @@ import UIKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
+    // UIImageView with avatar
+    lazy var avatarImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "nik"))
+        imageView.isUserInteractionEnabled = true
+        imageView.contentMode = UIView.ContentMode.scaleAspectFill
+        imageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
+        imageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
+        // Make image corners Rounded
+        imageView.layer.cornerRadius = 60
+        imageView.clipsToBounds = true
+        imageView.layer.borderWidth = 3
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.toAutoLayout()
+        return imageView
+    }()
+    
+    // label with name
+    private lazy var fullNameLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = "Nikita Bogdanov"
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.toAutoLayout()
+        return label
+    }()
+    
+    // label with status
+    private lazy var statusLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = statusText
+        label.textColor = .gray
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.toAutoLayout()
+        return label
+    }()
+    
+    // textField with status
+    private lazy var statusTextField: UITextField = {
+        let textField = UITextField()
+        textField.textColor = .black
+        textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        textField.backgroundColor = .white
+        textField.layer.cornerRadius = 12
+        textField.layer.borderWidth = 1
+        textField.layer.borderColor = UIColor.black.cgColor
+        textField.toAutoLayout()
+        textField.addTarget(self, action: #selector(statusTextFieldValueChanged), for: .editingChanged)
+        return textField
+    }()
+    
+    // statusButton
+    private lazy var setStatusButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .blue
+        button.setTitle("Set status", for: .normal)
+        button.addTarget(self, action: #selector(buttonStatusAction), for: .touchUpInside)
+    // Shadow and Radius for status Button
+        button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 3).cgColor
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowOpacity = 0.7
+        button.layer.shadowRadius = 4.0
+        button.layer.masksToBounds = false
+        button.layer.cornerRadius = 4.0
+        button.toAutoLayout()
+    return button
+    }()
+    
     var statusText = "At home"
-    
-    private lazy var avatarImage = UIImage(named: "nik.jpeg")
-    private var statusLabel = UILabel()
-    private lazy var statusTextField = UITextField(frame: .zero)
-    
+        
     private var initialStatusButtonConstraints = [NSLayoutConstraint]()
     private var newStatusButtonConstraints = [NSLayoutConstraint]()
     
@@ -34,79 +99,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // creating subviews
     func createSubViews() {
         backgroundColor = .white
-        
-        /// creating UIImageView with avatar
-        let avatarImageView: UIImageView = {
-            let imageView = UIImageView(image: avatarImage!)
-            imageView.contentMode = UIView.ContentMode.scaleAspectFill
-            imageView.image = avatarImage
-            imageView.heightAnchor.constraint(equalToConstant: 120).isActive = true
-            imageView.widthAnchor.constraint(equalToConstant: 120).isActive = true
-            // Make image corners Rounded
-            imageView.layer.cornerRadius = 60
-            imageView.clipsToBounds = true
-            imageView.layer.borderWidth = 3
-            imageView.layer.borderColor = UIColor.white.cgColor
-            imageView.toAutoLayout()
-            return imageView
-        }()
+
         self.addSubview(avatarImageView)
-        
-        /// creating label with name
-        let fullNameLabel: UILabel = {
-            let label = UILabel()
-            label.numberOfLines = 0
-            label.text = "Nikita Bogdanov"
-            label.textColor = .black
-            label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
-            label.toAutoLayout()
-            return label
-        }()
         self.addSubview(fullNameLabel)
-        
-        /// creating label with status
-        statusLabel = {
-            let label = UILabel()
-            label.numberOfLines = 0
-            label.text = statusText
-            label.textColor = .gray
-            label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-            label.toAutoLayout()
-            return label
-        }()
         self.addSubview(statusLabel)
-        
-        /// create text field
-        statusTextField = {
-            let textField = UITextField()
-            textField.textColor = .black
-            textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-            textField.backgroundColor = .white
-            textField.layer.cornerRadius = 12
-            textField.layer.borderWidth = 1
-            textField.layer.borderColor = UIColor.black.cgColor
-            textField.toAutoLayout()
-            textField.addTarget(self, action: #selector(statusTextFieldValueChanged), for: .editingChanged)
-            return textField
-        }()
         self.addSubview(statusTextField)
-        
-        /// set settings for statusButton
-        let setStatusButton: UIButton = {
-            let button = UIButton()
-            button.backgroundColor = .blue
-            button.setTitle("Set status", for: .normal)
-            button.addTarget(self, action: #selector(buttonStatusAction), for: .touchUpInside)
-        // Shadow and Radius for status Button
-            button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 3).cgColor
-            button.layer.shadowOffset = CGSize(width: 4, height: 4)
-            button.layer.shadowOpacity = 0.7
-            button.layer.shadowRadius = 4.0
-            button.layer.masksToBounds = false
-            button.layer.cornerRadius = 4.0
-            button.toAutoLayout()
-        return button
-        }()
         self.addSubview(setStatusButton)
     
         /// CONSTRAINTS

@@ -13,6 +13,7 @@
 		114EBBA927E28B66003A76DA /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 114EBBA827E28B66003A76DA /* ProfileHeaderView.swift */; };
 		1157DE0227DCA5E900535E81 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157DE0127DCA5E900535E81 /* FeedViewController.swift */; };
 		1157DE0527DCC59300535E81 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1157DE0427DCC59300535E81 /* PostViewController.swift */; };
+		1159E2852815E4D400D82DDA /* DetailedAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1159E2842815E4D400D82DDA /* DetailedAvatarView.swift */; };
 		115AFDDF27DCD6A7003E8F0B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AFDDE27DCD6A7003E8F0B /* Post.swift */; };
 		115AFDE127DCE08D003E8F0B /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 115AFDE027DCE08D003E8F0B /* InfoViewController.swift */; };
 		117526C527CD51BF00ED1749 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117526C427CD51BF00ED1749 /* AppDelegate.swift */; };
@@ -33,6 +34,7 @@
 		114EBBA827E28B66003A76DA /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		1157DE0127DCA5E900535E81 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		1157DE0427DCC59300535E81 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		1159E2842815E4D400D82DDA /* DetailedAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedAvatarView.swift; sourceTree = "<group>"; };
 		115AFDDE27DCD6A7003E8F0B /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		115AFDE027DCE08D003E8F0B /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		117526C127CD51BF00ED1749 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +82,14 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		1159E2832815E49700D82DDA /* Detailed */ = {
+			isa = PBXGroup;
+			children = (
+				1159E2842815E4D400D82DDA /* DetailedAvatarView.swift */,
+			);
+			path = Detailed;
+			sourceTree = "<group>";
+		};
 		115AFDDD27DCD681003E8F0B /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +117,7 @@
 		117526C327CD51BF00ED1749 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				1159E2832815E49700D82DDA /* Detailed */,
 				11B32349280630AF0054C051 /* Protocol */,
 				11B32346280620020054C051 /* Cells */,
 				114EBBA727E287AD003A76DA /* Profile */,
@@ -227,6 +238,7 @@
 				114EBBA927E28B66003A76DA /* ProfileHeaderView.swift in Sources */,
 				117526C727CD51BF00ED1749 /* SceneDelegate.swift in Sources */,
 				115AFDDF27DCD6A7003E8F0B /* Post.swift in Sources */,
+				1159E2852815E4D400D82DDA /* DetailedAvatarView.swift in Sources */,
 				1195781328109CB200BF5174 /* PhotosTableViewCell.swift in Sources */,
 				115AFDE127DCE08D003E8F0B /* InfoViewController.swift in Sources */,
 				11442D5A28116F8E00E9113D /* PhotosCollectionViewCell.swift in Sources */,
