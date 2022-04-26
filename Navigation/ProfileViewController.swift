@@ -42,6 +42,7 @@ final class ProfileViewController: UIViewController, TapLikedDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         tableView.reloadData()
     }
     
@@ -137,7 +138,17 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView( _ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             if indexPath.row == 0 {
             self.navigationController?.pushViewController(PhotosViewController(), animated: true)
-            } else { return }
+            } else {
+                let viewController = DetailedPostViewController()
+                viewController.selectedDataImage = dataSource[indexPath.row - 1].image
+                viewController.selectedDataLikes = dataSource[indexPath.row - 1].likes
+                viewController.selectedDataViews = dataSource[indexPath.row - 1].views + 1
+                viewController.selectedDataAuthor = dataSource[indexPath.row - 1].author
+                viewController.selectedDataDescription = dataSource[indexPath.row - 1].description
+                viewController.selectedId = dataSource[indexPath.row - 1].id
+                dataSource[indexPath.row - 1].views += 1
+                self.tableView.reloadRows(at: [indexPath], with: .none)
+                navigationController?.pushViewController(viewController, animated: true) }
         }
     
     // the method changes the "liked" flag and updates the data in the table
