@@ -29,7 +29,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var fullNameLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.text = "Nikita Bogdanov"
+        label.text = "Никита Богданов"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         label.toAutoLayout()
@@ -50,6 +50,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // textField with status
     private lazy var statusTextField: UITextField = {
         let textField = UITextField()
+        textField.placeholder = " Установите статус..."
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         textField.backgroundColor = .white
@@ -65,7 +66,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private lazy var setStatusButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .blue
-        button.setTitle("Set status", for: .normal)
+        button.setTitle("Установить статус", for: .normal)
         button.addTarget(self, action: #selector(buttonStatusAction), for: .touchUpInside)
     // Shadow and Radius for status Button
         button.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 3).cgColor
@@ -78,11 +79,10 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     return button
     }()
     
-    var statusText = "At home"
+    var statusText = "На работе"
         
     private var initialStatusButtonConstraints = [NSLayoutConstraint]()
     private var newStatusButtonConstraints = [NSLayoutConstraint]()
-    
     static let reuseIdentifier: String = String(describing: self)
     
     override init(reuseIdentifier: String?) {
@@ -99,7 +99,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // creating subviews
     func createSubViews() {
         backgroundColor = .white
-
         self.addSubview(avatarImageView)
         self.addSubview(fullNameLabel)
         self.addSubview(statusLabel)
@@ -144,9 +143,13 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     // function changing status
     @objc func buttonStatusAction() {
         statusTextFieldValueChanged()
+        if statusText.isEmpty {
+            statusTextField.shake()
+        } else {
         statusLabel.text = statusText
         statusTextField.text = nil
         addTapGestureToHideKeyboard()
+        }
     }
     
     // method to hide the keyboard, when you click the on the screen

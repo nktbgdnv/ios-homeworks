@@ -9,6 +9,9 @@ import UIKit
 
 class LogInViewController: UIViewController {
 
+    private lazy var defaultLogin = "123456"
+    private lazy var defaultPassword = "123456"
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.backgroundColor = .white
@@ -23,7 +26,7 @@ class LogInViewController: UIViewController {
         return contentView
     }()
     
-    // UIImageView with logo
+    // imageView with logo
     let logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "logo.jpg")
@@ -36,7 +39,7 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        textField.placeholder = "Email of phone"
+        textField.placeholder = "E-mail/телефон (по умолчанию \"123456\")"
         textField.autocapitalizationType = .none
         textField.backgroundColor = .systemGray6
         textField.layer.borderWidth = 0.5
@@ -51,7 +54,7 @@ class LogInViewController: UIViewController {
         let textField = UITextField()
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        textField.placeholder = "Password"
+        textField.placeholder = "Пароль (по умолчанию \"123456\")"
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
         textField.backgroundColor = .systemGray6
@@ -75,7 +78,7 @@ class LogInViewController: UIViewController {
         return stackView
     }()
     
-    // Log In button
+    // LogIn button
     private lazy var loginButton: UIButton = {
         let button = UIButton()
         button.layer.cornerRadius = 10
@@ -88,6 +91,19 @@ class LogInViewController: UIViewController {
         button.toAutoLayout()
         return button
     }()
+    
+    // label which will appear when the password is less than 6 characters
+    private lazy var invalidLabel: UILabel = {
+            let label = UILabel()
+            label.toAutoLayout()
+            label.text = "Ваш пароль состоит менее чем из 6 символов!"
+            label.textColor = .red
+            label.font = .systemFont(ofSize: 12)
+            label.contentMode = .scaleToFill
+            label.textAlignment = .center
+            label.isHidden = true
+            return label
+        }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -143,7 +159,26 @@ class LogInViewController: UIViewController {
     @objc private func loginButtonClick() {
         // passing to ProfileViewController instance
         let profileViewController = ProfileViewController()
-        self.navigationController?.pushViewController(profileViewController, animated: true)
+        guard let login = loginTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+                if login.isEmpty && password.isEmpty {
+                    loginTextField.shake()
+                    passwordTextField.shake()
+                } else if login.isEmpty {
+                    loginTextField.shake()
+                } else if password.isEmpty {
+                    passwordTextField.shake()
+                } else if password.count < 6 {
+                    invalidLabel.isHidden = false
+                } else if login == defaultLogin && password == defaultPassword {
+                    self.navigationController?.pushViewController(profileViewController, animated: true)
+                    invalidLabel.isHidden = true
+                } else {
+                    let alert = UIAlertController(title: "Неверный логин или пароль", message: nil, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    present(alert, animated: true, completion: nil)
+                    invalidLabel.isHidden = true
+                }
     }
     
     private func configureSubviews() {
@@ -155,6 +190,7 @@ class LogInViewController: UIViewController {
         self.loginStackView.addArrangedSubview(self.loginTextField)
         self.loginStackView.addArrangedSubview(self.passwordTextField)
         self.contentView.addSubview(self.loginButton)
+        self.contentView.addSubview(self.invalidLabel)
     }
     
     private func setupConstraints() {
@@ -185,7 +221,11 @@ class LogInViewController: UIViewController {
             self.loginButton.leadingAnchor.constraint(equalTo: self.loginStackView.leadingAnchor),
             self.loginButton.trailingAnchor.constraint(equalTo: self.loginStackView.trailingAnchor),
             self.loginButton.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            self.loginButton.heightAnchor.constraint(equalToConstant: 50)
+            self.loginButton.heightAnchor.constraint(equalToConstant: 50),
+            // constraints for invalidLabel
+            self.invalidLabel.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 20),
+            self.invalidLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            self.invalidLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
     }
 }
@@ -193,5 +233,13 @@ class LogInViewController: UIViewController {
 public extension UIView {
     func toAutoLayout() {
         self.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    func shake() {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.duration = 0.6
+        animation.values = [-20.0, 20.0, -20.0, 20.0, -10.0, 10.0, -5.0, 5.0, 0.0 ]
+        layer.add(animation, forKey: "shake")
     }
 }

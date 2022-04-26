@@ -9,8 +9,8 @@ import UIKit
 
 class FeedViewController: UIViewController {
     
-    var firstPost = Posts(author: "", description: "Первый пост", image: "", likes: 0, views: 0)
-    var secondPost = Posts(author: "", description: "Второй пост", image: "", likes: 0, views: 0)
+    var firstPost = Posts(author: "", description: "Первый пост", image: "", heartSymbol: "", likes: 0, views: 0)
+    var secondPost = Posts(author: "", description: "Второй пост", image: "", heartSymbol: "", likes: 0, views: 0)
 
     @objc private func firstPostbuttonAction() {
         let postViewController = PostViewController()

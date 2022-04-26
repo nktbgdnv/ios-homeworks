@@ -9,11 +9,14 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
     
+    var likedDelegate: TapLikedDelegate?
+    
     // create data pattern
     struct ViewModel {
         let author: String
         let image: String
         let description: String
+        let heartSymbol: String
         var likes: Int
         var views: Int
     }
@@ -25,7 +28,7 @@ class PostTableViewCell: UITableViewCell {
         view.layer.maskedCorners = [
             .layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMaxXMaxYCorner
         ]
-        view.translatesAutoresizingMaskIntoConstraints = false
+        view.toAutoLayout()
         return view
     }()
     
@@ -34,7 +37,7 @@ class PostTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.toAutoLayout()
         return stackView
     }()
     
@@ -43,7 +46,7 @@ class PostTableViewCell: UITableViewCell {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 10
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.toAutoLayout()
         return stackView
     }()
     
@@ -56,7 +59,7 @@ class PostTableViewCell: UITableViewCell {
         label.textColor = .black
         label.textAlignment = NSTextAlignment.left
         label.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         return label
     }()
     
@@ -66,7 +69,7 @@ class PostTableViewCell: UITableViewCell {
         imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
         imageView.setContentCompressionResistancePriority(UILayoutPriority(100), for: .vertical)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.toAutoLayout()
         return imageView
     }()
 
@@ -76,8 +79,7 @@ class PostTableViewCell: UITableViewCell {
         label.numberOfLines = 0
         label.textAlignment = NSTextAlignment.justified
         label.font = UIFont(name: "System", size: 14)
-        label.textColor = .systemGray
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         return label
     }()
 
@@ -86,8 +88,11 @@ class PostTableViewCell: UITableViewCell {
         let label = UILabel()
         label.backgroundColor = .clear
         label.font = UIFont(name: "System", size: 16)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapLiked))
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(tap)
         label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         return label
     }()
     
@@ -97,7 +102,7 @@ class PostTableViewCell: UITableViewCell {
         label.backgroundColor = .clear
         label.font = UIFont(name: "System", size: 16)
         label.textColor = .black
-        label.translatesAutoresizingMaskIntoConstraints = false
+        label.toAutoLayout()
         return label
     }()
 
@@ -156,7 +161,11 @@ class PostTableViewCell: UITableViewCell {
         self.authorLabel.text = viewModel.author
         self.imageImageView.image = UIImage(named: viewModel.image)
         self.descriptionLabel.text = viewModel.description
-        self.likesLabel.text = "Likes: " + String(viewModel.likes)
-        self.viewsLabel.text = "Views: " + String(viewModel.views)
+        self.likesLabel.text = viewModel.heartSymbol + " " + String(viewModel.likes)
+        self.viewsLabel.text = "Просмотров: " + String(viewModel.views)
+    }
+    
+    @objc func tapLiked() {
+        likedDelegate?.tapLikedLabel()
     }
 }
